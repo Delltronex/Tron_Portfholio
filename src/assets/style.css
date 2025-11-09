@@ -1,0 +1,357 @@
+/* -----------------------------------------------------------
+   Full style.css — TRON Neon Theme (Glowing Grid + Blur)
+   Place: src/assets/style.css
+   Ensure: public/tron.jpg exists for hero background
+   ----------------------------------------------------------- */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+:root {
+  --neon: #00eaff;
+  --neon-strong: #00eaff;
+  --text: #f2f6f7;
+  --muted: #888;
+  --glass: rgba(0,255,255,0.03);
+  --glass-strong: rgba(0,255,255,0.06);
+}
+
+/* Reset / Base */
+* { box-sizing: border-box; }
+html,body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #000;
+  color: var(--text);
+  background-image: radial-gradient(circle at bottom, #001 0%, #000 100%);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+/* --- Animated background layers --- */
+
+/* Tron pulse glow layer */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 90%, rgba(0,255,255,0.15), transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+@keyframes pulseGlow {
+  from { opacity: 0.3; }
+  to { opacity: 0.6; }
+}
+
+/* Glowing grid background */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to bottom, rgba(0,255,255,0.2) 1px, transparent 1px),
+    linear-gradient(to right, rgba(0,255,255,0.2) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 8px rgba(0,255,255,0.6)) blur(0.3px);
+  animation: tronGridMove 30s linear infinite;
+}
+@keyframes tronGridMove {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 80px 80px, 80px 80px; }
+}
+
+/* Floating particle shimmer */
+body::marker, body::selection {}
+body::after, body::before { transition: opacity 0.5s ease; }
+
+/* NAV */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px 20px;
+  background: rgba(0, 255, 255, 0.03);
+  border-bottom: 1px solid #0ff3;
+  position: relative;
+  z-index: 10;
+  align-items: center;
+}
+.nav a, .nav button, .nav .nav-links a {
+  text-decoration: none;
+  color: rgb(245, 252, 252);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: color .25s, text-shadow .25s;
+}
+.nav a:hover, .nav .nav-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px var(--neon);
+}
+
+/* Menu button (mobile) */
+.menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--neon);
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+.nav-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+/* ACTIVE LINK */
+.active-link {
+  color: var(--neon);
+  text-shadow: 0 0 8px var(--neon);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: center/cover no-repeat;
+  background-image: url('/tron.jpg');
+  text-align: center;
+  position: relative;
+  padding: 40px 20px;
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 3.8rem);
+  color: #f9fbfb;
+  text-shadow: 0 0 25px var(--neon);
+  margin: 0;
+  line-height: 0.95;
+}
+.hero h2 {
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  color: #fff;
+  letter-spacing: 2px;
+  margin-top: 12px;
+}
+
+/* Neon button */
+.neon-btn {
+  margin-top: 22px;
+  padding: 12px 30px;
+  border: 2px solid var(--neon);
+  color: var(--text);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 8px;
+  background: transparent;
+}
+.neon-btn::after {
+  content: ' →';
+  opacity: 0.9;
+  margin-left: 8px;
+  transform: translateX(0);
+  transition: transform .25s ease;
+}
+.neon-btn:hover {
+  background: var(--neon);
+  color: #000;
+  box-shadow: 0 0 30px var(--neon);
+}
+.neon-btn:hover::after { transform: translateX(6px); }
+
+/* PAGE SECTION + TITLES */
+.page-section {
+  padding: clamp(36px, 6vw, 64px) 20px;
+  text-align: center;
+}
+h1 {
+  text-align: center;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  margin-bottom: 28px;
+  text-shadow: 0 0 15px var(--neon);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+.card {
+  border: 1px solid var(--neon);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 18px rgba(0,234,255,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  background: rgba(0, 20, 30, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 36px var(--neon);
+}
+
+/* TIMELINE */
+.timeline {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: left;
+  border-left: 2px solid var(--neon);
+  padding-left: 22px;
+}
+.timeline-item {
+  margin-bottom: 30px;
+}
+.timeline-item h2 { margin-bottom: 6px; }
+.timeline-item span { color: var(--muted); }
+
+/* CONTACT */
+.contact-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 10px;
+}
+.contact-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  border: 1px solid var(--neon);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,234,255,0.06);
+  background: rgba(0, 20, 30, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform .2s ease, box-shadow .2s ease;
+  min-height: 180px;
+}
+.contact-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(0,234,255,0.18);
+}
+.contact-box h2 {
+  color: var(--neon);
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+  text-shadow: 0 0 10px var(--neon);
+}
+
+/* Contact info */
+.contact-info p { line-height: 1.6; margin: 6px 0; font-size: 0.98rem; }
+.contact-info a { color: var(--neon); text-decoration: none; }
+.contact-info a:hover { color: #fff; text-shadow: 0 0 10px var(--neon); }
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contact-form input,
+.contact-form textarea {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--neon);
+  color: #0ff;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  transition: box-shadow .18s ease, border .18s ease;
+  backdrop-filter: blur(6px);
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: rgba(0,255,255,0.5); }
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--neon);
+  border-color: var(--neon);
+}
+button.neon-btn {
+  cursor: pointer;
+  border: 2px solid var(--neon);
+  color: var(--neon);
+  background: transparent;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+button.neon-btn:hover {
+  background: var(--neon);
+  color: #000;
+  box-shadow: 0 0 22px var(--neon);
+}
+
+/* SMALLER DEVICES */
+@media (max-width: 900px) {
+  .grid { gap: 18px; }
+  .contact-container { gap: 22px; padding: 6px; }
+}
+
+/* NAV MOBILE BEHAVIOR */
+@media (max-width: 768px) {
+  .menu-btn { display: block; position: absolute; right: 18px; top: 12px; z-index: 20; }
+  .nav-links { display: none; flex-direction: column; gap: 12px; width: calc(100% - 48px); margin: 0 auto; }
+  .nav.open .nav-links { display: flex; background: rgba(0,0,0,0.6); padding: 14px; border-radius: 10px; }
+  .nav { padding: 12px 12px; }
+  .nav a { font-size: 0.98rem; }
+}
+
+/* HERO ON MOBILE */
+/* Disable grid + glow layers on mobile for HERO clarity */
+@media (max-width: 480px) {
+
+  body::after,   /* Tron grid */
+  body::before { /* glow aura */
+    display: none !important;
+  }
+
+  .hero {
+    background-image: url('/tron.jpg') !important; 
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .hero::after {
+    background: rgba(0,0,0,0.25) !important; /* keep light shade only */
+  }
+}

@@ -1,0 +1,173 @@
+/* Full page background and layout */
+.project-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #000814, #000);
+  color: #0ff;
+  font-family: "Orbitron", sans-serif;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing Tron grid lines overlay */
+.project-details::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(#00eaff33 1px, transparent 1px),
+    linear-gradient(90deg, #00eaff33 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  animation: gridMove 20s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes gridMove {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 40px 40px, 40px 40px; }
+}
+
+/* Main glowing box */
+.project-box {
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #00eaff;
+  border-radius: 16px;
+  box-shadow: 0 0 20px #00eaff88, inset 0 0 15px #00eaff33;
+  padding: 30px;
+  max-width: 700px;
+  width: 100%;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.project-box:hover {
+  box-shadow: 0 0 40px #00eaffbb, inset 0 0 25px #00eaff55;
+}
+
+/* Header */
+.pd-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.pd-title {
+  font-size: 2rem;
+  color: #0ff;
+  text-shadow: 0 0 10px #00eaff;
+  margin-bottom: 10px;
+}
+
+.pd-tag {
+  font-size: 1rem;
+  color: #00ffaa;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid #00ffaa;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+/* Description */
+.pd-description {
+  text-align: center;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #bdf;
+}
+
+/* Tech Section */
+.pd-tech {
+  border-top: 1px solid #00eaff55;
+  padding-top: 15px;
+  margin-bottom: 25px;
+}
+
+.pd-tech h2 {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #0ff;
+}
+
+.pd-tech ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.pd-tech li {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid #00eaff;
+  padding: 8px 15px;
+  border-radius: 12px;
+  color: #0ff;
+  transition: 0.3s;
+}
+
+.pd-tech li:hover {
+  background: #00eaff33;
+  transform: scale(1.1);
+}
+
+/* Buttons */
+.pd-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.pd-btn {
+  text-decoration: none;
+  padding: 10px 25px;
+  border: 1px solid #00eaff;
+  border-radius: 10px;
+  color: #00ffaa;
+  background: rgba(0, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.pd-btn:hover {
+  background: #00eaff33;
+  box-shadow: 0 0 10px #00eaff;
+  transform: scale(1.05);
+}
+
+/* Back button */
+.pd-back {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  background: transparent;
+  color: #00eaff;
+  cursor: pointer;
+  font-size: 1rem;
+  text-shadow: 0 0 8px #00eaff;
+  transition: 0.3s;
+}
+
+.pd-back:hover {
+  color: #0ff;
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .project-box {
+    padding: 20px;
+  }
+  .pd-title {
+    font-size: 1.6rem;
+  }
+  .pd-description {
+    font-size: 1rem;
+  }
+}
