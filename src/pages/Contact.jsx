@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
+import resume from  "public/Kaushal_R.pdf",
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -44,7 +45,7 @@ export default function Contact() {
           <p><strong>📧 Email:</strong> <a href="mailto:kaushalshukla912@gmail.com">kaushalshukla912@gmail.com</a></p>
           <p><strong>💻 GitHub:</strong> <a href="https://github.com/Delltronex" target="_blank" rel="noopener noreferrer">Delltronex</a></p>
           <p><strong>🔗 LinkedIn:</strong> <a href="https://www.linkedin.com/in/kaushal-delta/" target="_blank" rel="noopener noreferrer">kaushalshukla</a></p>
-          <p><strong>📄 Resume:</strong> <a href="/kaushal_R.pdf" download>Download Resume</a></p>
+          <p><strong>📄 Resume:</strong> <a href={resume} download>Download Resume</a></p>
         </div>
 
         <div className="contact-box contact-form-wrapper">
