@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-import resume from  "./public/Kaushal_R.pdf",
+import resume from  "public/Kaushal_R.pdf",
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
