@@ -41,7 +41,7 @@ export default function Contact() {
       <div className="contact-container">
         <div className="contact-box contact-info">
           <h2>Get in Touch</h2>
-          <p><strong>📞 Mobile:</strong> <a href="tel:+91 8739026208">+91 98765 43210</a></p>
+          <p><strong>📞 Mobile:</strong> <a href="tel:+91 8739026208">+91 8739026208</a></p>
           <p><strong>📧 Email:</strong> <a href="mailto:kaushalshukla912@gmail.com">kaushalshukla912@gmail.com</a></p>
           <p><strong>💻 GitHub:</strong> <a href="https://github.com/Delltronex" target="_blank" rel="noopener noreferrer">Delltronex</a></p>
           <p><strong>🔗 LinkedIn:</strong> <a href="www.linkedin.com/in/kaushal-delta" target="_blank" rel="noopener noreferrer">kaushalshukla</a></p>
