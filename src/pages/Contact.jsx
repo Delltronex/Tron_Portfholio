@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-
-
+import resume from "/Kaushal_R.pdf";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -42,11 +41,16 @@ export default function Contact() {
       <div className="contact-container">
         <div className="contact-box contact-info">
           <h2>Get in Touch</h2>
-          <p><strong>📞 Mobile:</strong> <a href="tel:+919876543210">+91 8739026208</a></p>
-          <p><strong>📧 Email:</strong> <a href="mailto:kaushalshukla912@gmail.com">kaushalshukla912@gmail.com</a></p>
-          <p><strong>💻 GitHub:</strong> <a href="https://github.com/Delltronex" target="_blank" rel="noopener noreferrer">Delltronex</a></p>
-          <p><strong>🔗 LinkedIn:</strong> <a href="https://www.linkedin.com/in/kaushal-delta/" target="_blank" rel="noopener noreferrer">kaushalshukla</a></p>
-          <p><strong>📄 Resume:</strong> <a href=" " >Download Resume</a></p>
+          <p><strong>📞 Mobile:</strong> <a href="tel:+919876543210">+91 98765 43210</a></p>
+          <p><strong>📧 Email:</strong> <a href="mailto:kaushalshukla@example.com">kaushalshukla@example.com</a></p>
+          <p><strong>💻 GitHub:</strong> <a href="https://github.com/kaushalshukla" target="_blank" rel="noopener noreferrer">github.com/kaushalshukla</a></p>
+          <p><strong>🔗 LinkedIn:</strong> <a href="https://linkedin.com/in/kaushalshukla" target="_blank" rel="noopener noreferrer">linkedin.com/in/kaushalshukla</a></p>
+           <p>
+            <strong>📄 Resume:</strong>{" "}
+            <a href={resume} download="Kaushal_R.pdf" target="_blank" rel="noopener noreferrer">
+              Download Resume
+            </a>
+          </p>
         </div>
 
         <div className="contact-box contact-form-wrapper">
