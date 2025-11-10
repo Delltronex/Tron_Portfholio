@@ -5,7 +5,7 @@ export default function Projects() {
   const navigate = useNavigate();
 
   const projects = [
-    { id: 1, title: "Project Alpha – AI/ML", desc: "AI predictive analytics system." },
+    { id: 1, title: "PDF Chat Web App", desc: "llama 2 model baesd chatbot." },
     { id: 2, title: "Project Beta – Web", desc: "Next.js Tron portfolio site." },
     { id: 3, title: "Project Gamma – Blockchain", desc: "Decentralized health records." },
     { id: 4, title: "Project Delta – FinTech", desc: "AI chatbot for financial risk." },
