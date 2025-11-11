@@ -30,7 +30,7 @@ Showcasing the **Tron aesthetic** and responsive layout of the portfolio website
 2. Projects Page
 <img width="1898" height="870" alt="image" src="https://github.com/user-attachments/assets/e65cfa56-78a4-4c2a-98d3-d6a939b47b89" />
 
-3. Projectdetails
+3. Project details
 <img width="1888" height="836" alt="image" src="https://github.com/user-attachments/assets/4ab0f79c-9500-48d8-bca5-2974f6461135" />
 
 
@@ -53,7 +53,7 @@ Showcasing the **Tron aesthetic** and responsive layout of the portfolio website
 
 ### 1️⃣ Clone the repository
 
-`git clone https://github.com/<your-username>/tron-portfolio.git`
+`https://github.com/Delltronex/Tron_Portfholio.git`
 `cd tron-portfolio`
 
 ### 2️⃣ Install dependencies
