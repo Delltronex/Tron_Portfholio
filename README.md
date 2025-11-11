@@ -23,16 +23,16 @@ A futuristic **Tron-inspired React + Vite portfolio website** showcasing my **pr
 
 ## 🖼️ Photo Section
 
-Showcasing the **Tron aesthetic** and responsive layout of the portfolio website.
+Showcasing the **Tron aesthetic** and responsive layout of the portfolio website
+1. Home Page    
+<img width="1898" height="866" alt="image" src="https://github.com/user-attachments/assets/7e547724-7f3e-4873-80fb-7bea7733462d" />
 
-| Home Page                                   | Projects Page                                       | ProjectDetails Page                                      |
-| ------------------------------------------- | --------------------------------------------------- | ------------------------------------------------- |
-| ![Home Page](<img width="1898" height="866" alt="image" src="https://github.com/user-attachments/assets/7e547724-7f3e-4873-80fb-7bea7733462d" />
-) | ![Projects Page](<img width="1898" height="870" alt="image" src="https://github.com/user-attachments/assets/e65cfa56-78a4-4c2a-98d3-d6a939b47b89" />
-) | ![ProjectDetails Page](<img width="1888" height="836" alt="image" src="https://github.com/user-attachments/assets/4ab0f79c-9500-48d8-bca5-2974f6461135" />
-) |
+2. Projects Page
+<img width="1898" height="870" alt="image" src="https://github.com/user-attachments/assets/e65cfa56-78a4-4c2a-98d3-d6a939b47b89" />
 
-> 📸 *All images are from the live Tron Portfolio build. Add your own screenshots in the `/public/screenshots/` folder.*
+3. Projectdetails
+<img width="1888" height="836" alt="image" src="https://github.com/user-attachments/assets/4ab0f79c-9500-48d8-bca5-2974f6461135" />
+
 
 ---
 
