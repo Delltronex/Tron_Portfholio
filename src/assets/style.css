@@ -129,7 +129,7 @@ body::after, body::before { transition: opacity 0.5s ease; }
   justify-content: center;
   align-items: center;
   background: center/cover no-repeat;
-  background-image: url('/tron1.avi');
+  background-image: url('/tron.jpg');
   text-align: center;
   position: relative;
   padding: 40px 20px;
