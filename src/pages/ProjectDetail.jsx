@@ -9,11 +9,11 @@ export default function ProjectDetails() {
   // 🧠 Each project has unique details + links
   const projects = {
     1: {
-      title: "Project Alpha – AI/ML",
+      title: "PDF Chat Webapp",
       tag: "AI/ML",
       description:
-        "An advanced AI-driven predictive analytics system that processes healthcare data and forecasts trends using ML algorithms.",
-      tech: ["Python", "TensorFlow", "Scikit-learn", "Flask"],
+        " Developed an AI-powered application for chatting with PDF documents using the LLaMA 2 model.",
+      tech: ["Python", "Langchain", "Llama 2", "Streamlit"],
       live: "https://project-alpha-demo.vercel.app",
       code: "https://github.com/Delltronex/PDF_Chatbot_translator.git",
     },
