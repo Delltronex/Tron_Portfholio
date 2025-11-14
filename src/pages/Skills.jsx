@@ -12,7 +12,7 @@ export default function Skills() {
 
         <div className="card">
           <h3>Frameworks</h3>
-          <p>TensorFlow, LangChain, Flask, Qerw.AI, N8N, HuggingFace</p>
+          <p>TensorFlow, LangChain, Flask, Qerw.AI, N8N, HuggingFace, GoogleADK</p>
         </div>
 
         <div className="card">
