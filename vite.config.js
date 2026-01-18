@@ -12,7 +12,7 @@ export default defineConfig({
         name: 'Kaushal Portfolio',
         short_name: 'Portfolio',
         description: 'Personal portfolio website',
-        theme_color: '#0d6efd',
+        theme_color: '00E5FF',
         background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
