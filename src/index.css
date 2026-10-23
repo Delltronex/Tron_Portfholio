@@ -1205,23 +1205,30 @@ ul {
   left: 28px;
   z-index: 1000;
   background: var(--bg-gradient-jet);
-  color: var(--white-1);
-  border: 1px solid var(--jet);
-  width: 44px;
-  height: 44px;
+  color: var(--orange-primary);
+  border: 2px solid var(--orange-primary);
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15), var(--shadow-orange);
   transition: var(--transition-1);
 }
 
-.theme-settings-trigger:hover {
-  transform: rotate(45deg);
-  border-color: var(--orange-primary);
+[data-theme="light"] .theme-settings-trigger {
+  background: #ffffff;
   color: var(--orange-primary);
-  box-shadow: var(--shadow-orange);
+  border: 2px solid var(--orange-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 0 12px var(--orange-glow);
+}
+
+.theme-settings-trigger:hover {
+  transform: rotate(45deg) scale(1.08);
+  background: var(--orange-primary);
+  color: #ffffff;
+  box-shadow: 0 6px 24px var(--orange-glow);
 }
 
 .customizer-overlay {
