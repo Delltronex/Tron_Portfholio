@@ -1334,9 +1334,15 @@ ul {
   transition: var(--transition-1);
 }
 
+[data-theme="light"] .mode-toggle-btn {
+  background: hsl(0, 0%, 96%);
+  border: 1px solid hsl(0, 0%, 85%);
+  color: hsl(0, 0%, 35%);
+}
+
 .mode-toggle-btn:hover {
   border-color: var(--orange-primary);
-  color: var(--white-1);
+  color: var(--orange-primary);
 }
 
 .mode-toggle-btn.active {
@@ -1344,6 +1350,12 @@ ul {
   border-color: var(--orange-primary);
   color: var(--orange-primary);
   font-weight: 600;
+}
+
+[data-theme="light"] .mode-toggle-btn.active {
+  background: hsla(var(--accent-hue), var(--accent-sat), var(--accent-light), 0.12);
+  border: 2px solid var(--orange-primary);
+  color: var(--orange-primary);
 }
 
 /* Color Swatches Grid */
