@@ -384,6 +384,12 @@ ul {
   z-index: 5;
 }
 
+[data-theme="light"] .navbar {
+  background: hsla(0, 0%, 100%, 0.85);
+  border: 1px solid var(--jet);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
 .navbar-list {
   display: flex;
   flex-wrap: wrap;
@@ -399,6 +405,10 @@ ul {
   transition: var(--transition-1);
   padding: 4px 6px;
   position: relative;
+}
+
+[data-theme="light"] .navbar-link {
+  color: hsl(0, 0%, 45%);
 }
 
 .navbar-link:hover,
