@@ -17,6 +17,7 @@ export default function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatInitialQuery, setChatInitialQuery] = useState(null);
   const [contactFeedback, setContactFeedback] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Theme Mode & Color Customizer State
   const [themeMode, setThemeMode] = useState('dark'); // 'dark' | 'light'
@@ -81,11 +82,57 @@ export default function App() {
     setIsChatOpen(true);
   };
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
-    setContactFeedback('Thank you! Your message has been sent. Kaushal will reply soon.');
-    e.target.reset();
-    setTimeout(() => setContactFeedback(null), 6000);
+    const form = e.target;
+    const formData = new FormData(form);
+    const name = formData.get('name') || '';
+    const email = formData.get('email') || '';
+    const message = formData.get('message') || '';
+
+    setIsSubmitting(true);
+    setContactFeedback(null);
+
+    const formEndpoint = import.meta.env.VITE_FORMSPREE_ID
+      ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`
+      : 'https://formspree.io/f/mqaevekr';
+
+    try {
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `New Portfolio Message from ${name}`
+        })
+      });
+
+      if (response.ok) {
+        setContactFeedback({
+          type: 'success',
+          text: `Thank you ${name}! Your message has been sent successfully. Kaushal will reply soon.`
+        });
+        form.reset();
+      } else {
+        throw new Error('Endpoint response not ok');
+      }
+    } catch {
+      // Fallback: Mailto client trigger
+      window.location.href = `mailto:${resumeData.email}?subject=${encodeURIComponent('Portfolio Inquiry from ' + name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+      setContactFeedback({
+        type: 'success',
+        text: `Thank you! Your email client has been prepared to send your message directly to ${resumeData.email}.`
+      });
+      form.reset();
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setContactFeedback(null), 8000);
+    }
   };
 
   return (
@@ -157,7 +204,7 @@ export default function App() {
             <li className="contact-item">
               <div className="icon-box">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z"/>
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z" />
                 </svg>
               </div>
               <div className="contact-info">
@@ -171,7 +218,7 @@ export default function App() {
             <li className="contact-item">
               <div className="icon-box">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
+                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
                 </svg>
               </div>
               <div className="contact-info">
@@ -190,14 +237,14 @@ export default function App() {
             <li className="social-item">
               <a href={resumeData.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
                 <svg viewBox="0 0 24 24">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z"/>
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z" />
                 </svg>
               </a>
             </li>
             <li className="social-item">
               <a href={resumeData.github} target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
                 <svg viewBox="0 0 24 24">
-                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/>
+                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
                 </svg>
               </a>
             </li>
@@ -517,20 +564,44 @@ export default function App() {
 
               <form className="contact-form" onSubmit={handleContactSubmit}>
                 <div className="form-inputs">
-                  <input type="text" className="form-input" placeholder="Full name" required />
-                  <input type="email" className="form-input" placeholder="Email address" required />
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-input"
+                    placeholder="Full name"
+                    required
+                    disabled={isSubmitting}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-input"
+                    placeholder="Email address"
+                    required
+                    disabled={isSubmitting}
+                  />
                 </div>
-                <textarea className="form-input" rows="5" placeholder="Your message" required style={{ marginBottom: '20px' }}></textarea>
+                <textarea
+                  name="message"
+                  className="form-input"
+                  rows="5"
+                  placeholder="Your message"
+                  required
+                  disabled={isSubmitting}
+                  style={{ marginBottom: '20px' }}
+                ></textarea>
 
-                <button type="submit" className="form-btn">
-                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>send</span>
-                  <span>Send Message</span>
+                <button type="submit" className="form-btn" disabled={isSubmitting} style={{ opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                    {isSubmitting ? 'sync' : 'send'}
+                  </span>
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 </button>
 
                 {contactFeedback && (
-                  <div className="form-success-banner">
+                  <div className="form-success-banner" style={{ marginTop: '16px' }}>
                     <span className="material-symbols-outlined">check_circle</span>
-                    <span>{contactFeedback}</span>
+                    <span>{typeof contactFeedback === 'object' ? contactFeedback.text : contactFeedback}</span>
                   </div>
                 )}
               </form>
