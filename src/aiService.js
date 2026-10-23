@@ -80,7 +80,13 @@ export function checkQuerySafety(query) {
  * Fallback: qwen/qwen3.8-27b (active & verified)
  */
 async function callGroqAPI(apiKey, conversation) {
-  const models = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3.8-27b'];
+  const models = [
+    'llama-3.3-70b-versatile',
+    'llama-3.1-8b-instant',
+    'openai/gpt-oss-120b',
+    'openai/gpt-oss-20b',
+    'qwen/qwen3.8-27b'
+  ];
   let lastError = null;
 
   for (const model of models) {
@@ -127,7 +133,7 @@ async function callGroqAPI(apiKey, conversation) {
  * Call Gemini API using currently active models
  */
 async function callGeminiAPI(apiKey, conversation) {
-  const models = ['gemini-2.5-computer-use-preview-10-2025', 'gemini-1.5-flash'];
+  const models = ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.5-computer-use-preview-10-2025'];
   let lastError = null;
 
   for (const model of models) {
