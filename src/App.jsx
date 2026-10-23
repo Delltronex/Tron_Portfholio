@@ -93,9 +93,7 @@ export default function App() {
     setIsSubmitting(true);
     setContactFeedback(null);
 
-    const formEndpoint = import.meta.env.VITE_FORMSPREE_ID
-      ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`
-      : 'https://formspree.io/f/mqaevekr';
+    const formEndpoint = `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID || 'xkjjnwkj'}`;
 
     try {
       const response = await fetch(formEndpoint, {
