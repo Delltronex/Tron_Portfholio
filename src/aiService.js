@@ -188,21 +188,21 @@ export async function sendAIMessage(messages) {
     return safety.reason;
   }
 
-  // 2. Groq Cloud (Active verified models: openai/gpt-oss-120b & openai/gpt-oss-20b)
-  if (GROQ_API_KEY) {
-    try {
-      return await callGroqAPI(GROQ_API_KEY, messages);
-    } catch (err) {
-      console.warn("Groq attempt failed, trying Gemini fallback:", err.message);
-    }
-  }
-
-  // 3. Gemini Fallback
+  // 2. Google Gemini (Active & Verified: gemini-3.8-flash)
   if (GEMINI_API_KEY) {
     try {
       return await callGeminiAPI(GEMINI_API_KEY, messages);
     } catch (err) {
-      console.warn("Gemini attempt failed:", err.message);
+      console.warn("Gemini attempt failed, trying Groq fallback:", err.message);
+    }
+  }
+
+  // 3. Groq Cloud Fallback
+  if (GROQ_API_KEY) {
+    try {
+      return await callGroqAPI(GROQ_API_KEY, messages);
+    } catch (err) {
+      console.warn("Groq attempt failed:", err.message);
     }
   }
 
