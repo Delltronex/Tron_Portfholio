@@ -528,15 +528,20 @@ ul {
 
 /* ================= Tab Pages Smooth iOS Transition ================= */
 .tab-content {
-  animation: appleTabTransition 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: appleTabTransition 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: transform, opacity, filter;
+  transform-origin: top center;
 }
 
 @keyframes appleTabTransition {
   0% {
     opacity: 0;
-    transform: translateY(14px) scale(0.985);
-    filter: blur(4px);
+    transform: translateY(22px) scale(0.975);
+    filter: blur(6px);
+  }
+
+  50% {
+    opacity: 0.85;
   }
 
   100% {

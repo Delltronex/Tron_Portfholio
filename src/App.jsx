@@ -362,7 +362,7 @@ export default function App() {
 
           {/* ================= TAB 1: ABOUT ================= */}
           {activeTab === 'about' && (
-            <article className="tab-content">
+            <article key="about" className="tab-content">
               <header className="article-header">
                 <h2 className="article-title">About Me</h2>
               </header>
@@ -434,7 +434,7 @@ export default function App() {
 
           {/* ================= TAB 2: RESUME ================= */}
           {activeTab === 'resume' && (
-            <article className="tab-content">
+            <article key="resume" className="tab-content">
               <header className="article-header">
                 <h2 className="article-title">Resume</h2>
               </header>
@@ -541,7 +541,7 @@ export default function App() {
 
           {/* ================= TAB 3: PORTFOLIO ================= */}
           {activeTab === 'portfolio' && (
-            <article className="tab-content">
+            <article key="portfolio" className="tab-content">
               <header className="article-header">
                 <h2 className="article-title">Portfolio Projects</h2>
               </header>
@@ -584,7 +584,7 @@ export default function App() {
 
           {/* ================= TAB 4: CONTACT ================= */}
           {activeTab === 'contact' && (
-            <article className="tab-content">
+            <article key="contact" className="tab-content">
               <header className="article-header">
                 <h2 className="article-title">Contact</h2>
               </header>
