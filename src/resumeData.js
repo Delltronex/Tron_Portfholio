@@ -1,6 +1,6 @@
 export const resumeData = {
   name: "Kaushal Shukla",
-  title: "Generative AI & Full-Stack Developer",
+  title: "AI Full-Stack Developer",
   headline: "Information Technology Graduate & Developer Intern specializing in Agentic AI, LLM Orchestration, RAG & Full-Stack Systems",
   phone: "+91 8739026208",
   email: "kaushalshukla912@gmail.com",
