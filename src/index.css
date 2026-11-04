@@ -1031,6 +1031,8 @@ ul {
 
 .form-input {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   background: var(--eerie-black-1);
   border: 1px solid var(--jet);
   border-radius: 12px;
@@ -1040,6 +1042,11 @@ ul {
   outline: none;
   font-family: inherit;
   transition: var(--transition-1);
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 120px;
 }
 
 .form-input:focus {
