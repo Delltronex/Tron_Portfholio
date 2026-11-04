@@ -9,6 +9,7 @@ export const resumeData = {
   github: "https://github.com/Delltronex",
   githubUsername: "Delltronex",
   location: "Mumbai, Maharashtra, India",
+  expectedCtc: "5 to 10 LPA",
   experienceYears: "1+ Years Experience",
   about: `Information Technology graduate and Developer Intern experienced in integrating Generative AI and LLMs into production-grade web applications. Skilled in Python, FastAPI, RAG, Agentic AI, intelligent chatbots, multi-model orchestration, and enterprise AI automation. Proven track record in optimizing vector stores, reducing system-prompt token costs by ~60%, and developing responsive client applications.`,
 
