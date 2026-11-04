@@ -196,7 +196,7 @@ export default function App() {
           <div className="sidebar-info">
             <figure className="avatar-box">
               <div className="avatar-initials">KS</div>
-              <span className="online-dot" title="Available for opportunities"></span>
+
             </figure>
 
             <div className="info-content">
