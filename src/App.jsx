@@ -209,9 +209,9 @@ export default function App() {
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               aria-label="Toggle Contacts"
             >
-
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-                {isSidebarOpen ? 'expand_less' : 'expand_more'}
+              <span>{isSidebarOpen ? 'Hide Contacts' : 'Show Contacts'}</span>
+              <span className={`material-symbols-outlined info_more-icon ${isSidebarOpen ? 'rotated' : ''}`} style={{ fontSize: '18px' }}>
+                expand_more
               </span>
             </button>
           </div>
