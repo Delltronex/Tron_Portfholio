@@ -99,8 +99,8 @@ export default function App() {
     // 2. Formspree fallback if configured
     // 3. Mailto client fallback
     const customApiEndpoint = import.meta.env.VITE_CONTACT_API_URL || '/api/contact';
-    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ID 
-      ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}` 
+    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ID
+      ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`
       : null;
 
     let sent = false;
@@ -198,7 +198,7 @@ export default function App() {
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               aria-label="Toggle Contacts"
             >
-              <span>{isSidebarOpen ? 'Hide Contacts' : 'Show Contacts'}</span>
+
               <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
                 {isSidebarOpen ? 'expand_less' : 'expand_more'}
               </span>
@@ -223,94 +223,94 @@ export default function App() {
 
             {/* Contact Details List */}
             <ul className="contacts-list">
-            <li className="contact-item">
-              <div className="icon-box">
-                <span className="material-symbols-outlined">mail</span>
-              </div>
-              <div className="contact-info">
-                <p className="contact-title">Email</p>
-                <a href={`mailto:${resumeData.email}`} className="contact-link">{resumeData.email}</a>
-              </div>
-            </li>
+              <li className="contact-item">
+                <div className="icon-box">
+                  <span className="material-symbols-outlined">mail</span>
+                </div>
+                <div className="contact-info">
+                  <p className="contact-title">Email</p>
+                  <a href={`mailto:${resumeData.email}`} className="contact-link">{resumeData.email}</a>
+                </div>
+              </li>
 
-            <li className="contact-item">
-              <div className="icon-box">
-                <span className="material-symbols-outlined">call</span>
-              </div>
-              <div className="contact-info">
-                <p className="contact-title">Phone</p>
-                <a href={`tel:${resumeData.phone.replace(/\s+/g, '')}`} className="contact-link">{resumeData.phone}</a>
-              </div>
-            </li>
+              <li className="contact-item">
+                <div className="icon-box">
+                  <span className="material-symbols-outlined">call</span>
+                </div>
+                <div className="contact-info">
+                  <p className="contact-title">Phone</p>
+                  <a href={`tel:${resumeData.phone.replace(/\s+/g, '')}`} className="contact-link">{resumeData.phone}</a>
+                </div>
+              </li>
 
-            <li className="contact-item">
-              <div className="icon-box">
-                <span className="material-symbols-outlined">location_on</span>
-              </div>
-              <div className="contact-info">
-                <p className="contact-title">Location</p>
-                <address className="contact-link" style={{ fontStyle: 'normal' }}>{resumeData.location}</address>
-              </div>
-            </li>
+              <li className="contact-item">
+                <div className="icon-box">
+                  <span className="material-symbols-outlined">location_on</span>
+                </div>
+                <div className="contact-info">
+                  <p className="contact-title">Location</p>
+                  <address className="contact-link" style={{ fontStyle: 'normal' }}>{resumeData.location}</address>
+                </div>
+              </li>
 
-            <li className="contact-item">
-              <div className="icon-box">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z" />
-                </svg>
-              </div>
-              <div className="contact-info">
-                <p className="contact-title">LinkedIn</p>
-                <a href={resumeData.linkedin} target="_blank" rel="noopener noreferrer" className="contact-link">
-                  in/{resumeData.linkedinUsername}
+              <li className="contact-item">
+                <div className="icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z" />
+                  </svg>
+                </div>
+                <div className="contact-info">
+                  <p className="contact-title">LinkedIn</p>
+                  <a href={resumeData.linkedin} target="_blank" rel="noopener noreferrer" className="contact-link">
+                    in/{resumeData.linkedinUsername}
+                  </a>
+                </div>
+              </li>
+
+              <li className="contact-item">
+                <div className="icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
+                  </svg>
+                </div>
+                <div className="contact-info">
+                  <p className="contact-title">GitHub</p>
+                  <a href={resumeData.github} target="_blank" rel="noopener noreferrer" className="contact-link">
+                    github.com/{resumeData.githubUsername}
+                  </a>
+                </div>
+              </li>
+            </ul>
+
+            <div className="sidebar-separator"></div>
+
+            {/* Social Links */}
+            <ul className="social-list">
+              <li className="social-item">
+                <a href={resumeData.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z" />
+                  </svg>
                 </a>
-              </div>
-            </li>
-
-            <li className="contact-item">
-              <div className="icon-box">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
-                </svg>
-              </div>
-              <div className="contact-info">
-                <p className="contact-title">GitHub</p>
-                <a href={resumeData.github} target="_blank" rel="noopener noreferrer" className="contact-link">
-                  github.com/{resumeData.githubUsername}
+              </li>
+              <li className="social-item">
+                <a href={resumeData.github} target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
+                  </svg>
                 </a>
-              </div>
-            </li>
-          </ul>
-
-          <div className="sidebar-separator"></div>
-
-          {/* Social Links */}
-          <ul className="social-list">
-            <li className="social-item">
-              <a href={resumeData.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
-                <svg viewBox="0 0 24 24">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 0 0 1.66-1.66A1.66 1.66 0 0 0 6.46 5.4a1.66 1.66 0 0 0-1.66 1.7 1.66 1.66 0 0 0 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78Z" />
-                </svg>
-              </a>
-            </li>
-            <li className="social-item">
-              <a href={resumeData.github} target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
-                </svg>
-              </a>
-            </li>
-            <li className="social-item">
-              <a href={`mailto:${resumeData.email}`} className="social-link" title="Email">
-                <span className="material-symbols-outlined">email</span>
-              </a>
-            </li>
-            <li className="social-item">
-              <button onClick={() => openChatWithQuery()} className="social-link" title="AI Assistant">
-                <span className="material-symbols-outlined">smart_toy</span>
-              </button>
-            </li>
-          </ul>
+              </li>
+              <li className="social-item">
+                <a href={`mailto:${resumeData.email}`} className="social-link" title="Email">
+                  <span className="material-symbols-outlined">email</span>
+                </a>
+              </li>
+              <li className="social-item">
+                <button onClick={() => openChatWithQuery()} className="social-link" title="AI Assistant">
+                  <span className="material-symbols-outlined">smart_toy</span>
+                </button>
+              </li>
+            </ul>
           </div>
         </aside>
 
@@ -351,16 +351,6 @@ export default function App() {
                   onClick={() => setActiveTab('contact')}
                 >
                   Contact
-                </button>
-              </li>
-              <li className="navbar-item">
-                <button
-                  className="navbar-link"
-                  style={{ color: 'var(--orange-primary)', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: '600' }}
-                  onClick={() => openChatWithQuery()}
-                >
-                  <span className="material-symbols-outlined" style={{ fontSize: '17px' }}>smart_toy</span>
-                  <span>AI Twin</span>
                 </button>
               </li>
             </ul>
