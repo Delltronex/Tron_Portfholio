@@ -14,6 +14,7 @@ const COLOR_PRESETS = [
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('about');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatInitialQuery, setChatInitialQuery] = useState(null);
   const [contactFeedback, setContactFeedback] = useState(null);
@@ -180,7 +181,7 @@ export default function App() {
         {/* ========================================================
             SIDEBAR (codewithsadee vCard Architecture)
             ======================================================== */}
-        <aside className="sidebar">
+        <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
           <div className="sidebar-info">
             <figure className="avatar-box">
               <div className="avatar-initials">KS</div>
@@ -191,25 +192,37 @@ export default function App() {
               <h1 className="name">{resumeData.name}</h1>
               <p className="title">{resumeData.title}</p>
             </div>
-          </div>
 
-          <div className="sidebar-separator"></div>
-
-          {/* AI Twin Trigger Card */}
-          <div className="sidebar-ai-card">
-            <span className="material-symbols-outlined ai-pulse-icon">psychology</span>
-            <div style={{ fontSize: '13px', fontWeight: '600', color: 'var(--white-2)' }}>Ask My AI Twin</div>
-            <p style={{ fontSize: '11.5px', color: 'var(--light-gray-70)', margin: '4px 0 8px' }}>
-              Instant answers on my resume &amp; experience
-            </p>
-            <button className="sidebar-ai-btn" onClick={() => openChatWithQuery()}>
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>chat</span>
-              <span>Start Conversation</span>
+            <button
+              className="info_more-btn"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              aria-label="Toggle Contacts"
+            >
+              <span>{isSidebarOpen ? 'Hide Contacts' : 'Show Contacts'}</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
+                {isSidebarOpen ? 'expand_less' : 'expand_more'}
+              </span>
             </button>
           </div>
 
-          {/* Contact Details List */}
-          <ul className="contacts-list">
+          <div className="sidebar-info_more">
+            <div className="sidebar-separator"></div>
+
+            {/* AI Twin Trigger Card */}
+            <div className="sidebar-ai-card">
+              <span className="material-symbols-outlined ai-pulse-icon">psychology</span>
+              <div style={{ fontSize: '13px', fontWeight: '600', color: 'var(--white-2)' }}>Ask My AI Twin</div>
+              <p style={{ fontSize: '11.5px', color: 'var(--light-gray-70)', margin: '4px 0 8px' }}>
+                Instant answers on my resume &amp; experience
+              </p>
+              <button className="sidebar-ai-btn" onClick={() => openChatWithQuery()}>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>chat</span>
+                <span>Start Conversation</span>
+              </button>
+            </div>
+
+            {/* Contact Details List */}
+            <ul className="contacts-list">
             <li className="contact-item">
               <div className="icon-box">
                 <span className="material-symbols-outlined">mail</span>
@@ -298,6 +311,7 @@ export default function App() {
               </button>
             </li>
           </ul>
+          </div>
         </aside>
 
         {/* ========================================================
