@@ -14,11 +14,22 @@ const COLOR_PRESETS = [
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('about');
+  const [tabDirection, setTabDirection] = useState('right'); // 'right' | 'left'
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatInitialQuery, setChatInitialQuery] = useState(null);
   const [contactFeedback, setContactFeedback] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const TABS_ORDER = ['about', 'resume', 'portfolio', 'contact'];
+
+  const handleTabChange = (newTab) => {
+    if (newTab === activeTab) return;
+    const oldIdx = TABS_ORDER.indexOf(activeTab);
+    const newIdx = TABS_ORDER.indexOf(newTab);
+    setTabDirection(newIdx > oldIdx ? 'right' : 'left');
+    setActiveTab(newTab);
+  };
 
   // Theme Mode & Color Customizer State
   const [themeMode, setThemeMode] = useState('dark'); // 'dark' | 'light'
@@ -323,12 +334,13 @@ export default function App() {
             ======================================================== */}
         <div className="main-content">
           {/* Top-Right Pill Navbar (codewithsadee Layout) */}
-          <nav className="navbar">
+          <nav className="navbar" data-active={activeTab}>
+            <div className="navbar-pill-glider" data-tab={activeTab}></div>
             <ul className="navbar-list">
               <li className="navbar-item">
                 <button
                   className={`navbar-link ${activeTab === 'about' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('about')}
+                  onClick={() => handleTabChange('about')}
                 >
                   About
                 </button>
@@ -336,7 +348,7 @@ export default function App() {
               <li className="navbar-item">
                 <button
                   className={`navbar-link ${activeTab === 'resume' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('resume')}
+                  onClick={() => handleTabChange('resume')}
                 >
                   Resume
                 </button>
@@ -344,7 +356,7 @@ export default function App() {
               <li className="navbar-item">
                 <button
                   className={`navbar-link ${activeTab === 'portfolio' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('portfolio')}
+                  onClick={() => handleTabChange('portfolio')}
                 >
                   Portfolio
                 </button>
@@ -352,7 +364,7 @@ export default function App() {
               <li className="navbar-item">
                 <button
                   className={`navbar-link ${activeTab === 'contact' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('contact')}
+                  onClick={() => handleTabChange('contact')}
                 >
                   Contact
                 </button>
@@ -362,7 +374,7 @@ export default function App() {
 
           {/* ================= TAB 1: ABOUT ================= */}
           {activeTab === 'about' && (
-            <article key="about" className="tab-content">
+            <article key="about" className={`tab-content slide-from-${tabDirection}`}>
               <header className="article-header">
                 <h2 className="article-title">About Me</h2>
               </header>
@@ -434,7 +446,7 @@ export default function App() {
 
           {/* ================= TAB 2: RESUME ================= */}
           {activeTab === 'resume' && (
-            <article key="resume" className="tab-content">
+            <article key="resume" className={`tab-content slide-from-${tabDirection}`}>
               <header className="article-header">
                 <h2 className="article-title">Resume</h2>
               </header>
@@ -541,7 +553,7 @@ export default function App() {
 
           {/* ================= TAB 3: PORTFOLIO ================= */}
           {activeTab === 'portfolio' && (
-            <article key="portfolio" className="tab-content">
+            <article key="portfolio" className={`tab-content slide-from-${tabDirection}`}>
               <header className="article-header">
                 <h2 className="article-title">Portfolio Projects</h2>
               </header>
@@ -584,7 +596,7 @@ export default function App() {
 
           {/* ================= TAB 4: CONTACT ================= */}
           {activeTab === 'contact' && (
-            <article key="contact" className="tab-content">
+            <article key="contact" className={`tab-content slide-from-${tabDirection}`}>
               <header className="article-header">
                 <h2 className="article-title">Contact</h2>
               </header>

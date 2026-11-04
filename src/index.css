@@ -526,27 +526,52 @@ ul {
   border-radius: 3px;
 }
 
-/* ================= Tab Pages Smooth iOS Transition ================= */
+/* ================= Tab Pages Apple iOS Spring Transition ================= */
 .tab-content {
-  animation: appleTabTransition 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: transform, opacity, filter;
   transform-origin: top center;
 }
 
-@keyframes appleTabTransition {
+.tab-content.slide-from-right {
+  animation: appleTabSlideRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.tab-content.slide-from-left {
+  animation: appleTabSlideLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes appleTabSlideRight {
   0% {
     opacity: 0;
-    transform: translateY(22px) scale(0.975);
-    filter: blur(6px);
+    transform: translate3d(36px, 0, 0) scale(0.985);
+    filter: blur(8px);
   }
 
   50% {
-    opacity: 0.85;
+    opacity: 0.8;
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes appleTabSlideLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-36px, 0, 0) scale(0.985);
+    filter: blur(8px);
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
     filter: blur(0);
   }
 }
@@ -1300,7 +1325,8 @@ ul {
   border-radius: 12px;
   padding: 11px 14px;
   color: var(--white-2);
-  font-size: 16px; /* Prevents auto-zoom on iOS Safari */
+  font-size: 16px;
+  /* Prevents auto-zoom on iOS Safari */
   outline: none;
   transition: var(--transition-1);
   min-width: 0;
@@ -1670,7 +1696,8 @@ ul {
 
   .main-content {
     width: 100%;
-    margin-bottom: 65px; /* Leave space for bottom fixed navbar */
+    margin-bottom: 65px;
+    /* Leave space for bottom fixed navbar */
   }
 
   /* Fixed bottom Apple Liquid Glass navigation bar */
@@ -1681,24 +1708,56 @@ ul {
     left: 14px;
     right: 14px;
     width: auto;
-    background: rgba(28, 28, 30, 0.7);
+    background: rgba(28, 28, 30, 0.72);
     backdrop-filter: blur(28px) saturate(190%);
     -webkit-backdrop-filter: blur(28px) saturate(190%);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 28px;
-    box-shadow: 
+    box-shadow:
       0 16px 36px rgba(0, 0, 0, 0.5),
       inset 0 1px 1px rgba(255, 255, 255, 0.2);
     z-index: 100;
     padding: 6px;
     margin: 0 auto;
     max-width: 440px;
+    overflow: hidden;
+  }
+
+  /* Sliding physical Apple capsule behind active tab */
+  .navbar-pill-glider {
+    display: block;
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    width: calc((100% - 12px) / 4);
+    border-radius: 22px;
+    background: var(--bg-gradient-orange);
+    box-shadow: 0 4px 14px var(--orange-glow);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .navbar-pill-glider[data-tab="about"] {
+    transform: translateX(0%);
+  }
+
+  .navbar-pill-glider[data-tab="resume"] {
+    transform: translateX(100%);
+  }
+
+  .navbar-pill-glider[data-tab="portfolio"] {
+    transform: translateX(200%);
+  }
+
+  .navbar-pill-glider[data-tab="contact"] {
+    transform: translateX(300%);
   }
 
   [data-theme="light"] .navbar {
     background: rgba(255, 255, 255, 0.75);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 
+    box-shadow:
       0 14px 30px rgba(0, 0, 0, 0.12),
       inset 0 1px 1px rgba(255, 255, 255, 0.8);
   }
@@ -1709,8 +1768,10 @@ ul {
     justify-content: space-between;
     align-items: center;
     padding: 0;
-    gap: 4px;
+    gap: 0;
     margin: 0;
+    position: relative;
+    z-index: 2;
   }
 
   .navbar-item {
@@ -1721,7 +1782,7 @@ ul {
   .navbar-link {
     font-size: 13px;
     font-weight: 500;
-    padding: 9px 6px;
+    padding: 9px 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1729,8 +1790,9 @@ ul {
     white-space: nowrap;
     border-radius: 22px;
     color: rgba(255, 255, 255, 0.65);
-    background: transparent;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    background: transparent !important;
+    box-shadow: none !important;
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease;
   }
 
   [data-theme="light"] .navbar-link {
@@ -1738,13 +1800,11 @@ ul {
   }
 
   .navbar-link:active {
-    transform: scale(0.94);
+    transform: scale(0.92);
   }
 
   .navbar-link.active {
     color: var(--white-1);
-    background: var(--bg-gradient-orange);
-    box-shadow: 0 4px 14px var(--orange-glow);
     font-weight: 600;
   }
 
@@ -1819,7 +1879,8 @@ ul {
   }
 
   .chat-input-vcard input {
-    font-size: 16px; /* Prevents auto-zoom on mobile */
+    font-size: 16px;
+    /* Prevents auto-zoom on mobile */
     padding: 10px 12px;
   }
 
