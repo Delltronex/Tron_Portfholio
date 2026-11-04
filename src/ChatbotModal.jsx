@@ -21,8 +21,19 @@ export default function ChatbotModal({ isOpen, onClose, initialQuery }) {
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 200);
+      // Prevent background scrolling on mobile when modal is open
+      document.body.style.overflow = 'hidden';
+      // Only auto-focus on non-touch devices to avoid abruptly opening mobile keyboard
+      const isTouch = window.matchMedia('(pointer: coarse)').matches;
+      if (!isTouch) {
+        setTimeout(() => inputRef.current?.focus(), 200);
+      }
+    } else {
+      document.body.style.overflow = '';
     }
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
 
   useEffect(() => {

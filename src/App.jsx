@@ -93,44 +93,85 @@ export default function App() {
     setIsSubmitting(true);
     setContactFeedback(null);
 
-    const formEndpoint = `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID || 'xkjjnwkj'}`;
+    // Endpoint prioritization:
+    // 1. Custom SMTP API endpoint (Vercel `/api/contact` or local Node server http://localhost:5001/api/contact)
+    // 2. Formspree fallback if configured
+    // 3. Mailto client fallback
+    const customApiEndpoint = import.meta.env.VITE_CONTACT_API_URL || '/api/contact';
+    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ID 
+      ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}` 
+      : null;
 
+    let sent = false;
+
+    // Try custom SMTP backend / serverless endpoint first
     try {
-      const response = await fetch(formEndpoint, {
+      const response = await fetch(customApiEndpoint, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          _subject: `New Portfolio Message from ${name}`
-        })
+        body: JSON.stringify({ name, email, message })
       });
 
       if (response.ok) {
+        sent = true;
         setContactFeedback({
           type: 'success',
-          text: `Thank you ${name}! Your message has been sent successfully. Kaushal will reply soon.`
+          text: `Thank you ${name}! Your message has been sent directly to Kaushal via SMTP.`
         });
         form.reset();
       } else {
-        throw new Error('Endpoint response not ok');
+        const errorData = await response.json().catch(() => ({}));
+        console.warn('SMTP endpoint returned error, trying fallback:', errorData);
       }
-    } catch {
-      // Fallback: Mailto client trigger
+    } catch (err) {
+      console.warn('SMTP endpoint unreachable or failed, attempting fallback...', err);
+    }
+
+    // Fallback to Formspree if SMTP endpoint was not active or returned error
+    if (!sent && formspreeEndpoint) {
+      try {
+        const response = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+            _subject: `New Portfolio Message from ${name}`
+          })
+        });
+
+        if (response.ok) {
+          sent = true;
+          setContactFeedback({
+            type: 'success',
+            text: `Thank you ${name}! Your message has been sent successfully.`
+          });
+          form.reset();
+        }
+      } catch (err) {
+        console.warn('Formspree fallback also failed:', err);
+      }
+    }
+
+    // Ultimate fallback: Mailto client
+    if (!sent) {
       window.location.href = `mailto:${resumeData.email}?subject=${encodeURIComponent('Portfolio Inquiry from ' + name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
       setContactFeedback({
         type: 'success',
-        text: `Thank you! Your email client has been prepared to send your message directly to ${resumeData.email}.`
+        text: `Opening your email client to dispatch message directly to ${resumeData.email}...`
       });
       form.reset();
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setContactFeedback(null), 8000);
     }
+
+    setIsSubmitting(false);
+    setTimeout(() => setContactFeedback(null), 8000);
   };
 
   return (
