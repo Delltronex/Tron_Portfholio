@@ -1968,8 +1968,8 @@ textarea.form-input {
   /* Fullscreen mobile optimized Chatbot modal */
   .vcard-chat-overlay {
     padding: 0;
-    align-items: flex-end;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: stretch;
     background: rgba(0, 0, 0, 0.85);
   }
 
@@ -1983,12 +1983,19 @@ textarea.form-input {
     border-radius: 0;
     border: none;
     box-shadow: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
 
   .chat-header-vcard {
     padding: 12px 14px;
-    padding-top: max(12px, env(safe-area-inset-top));
+    padding-top: max(14px, env(safe-area-inset-top));
     border-radius: 0;
+    flex-shrink: 0;
+    z-index: 10;
+    position: relative;
   }
 
   .chat-name {
