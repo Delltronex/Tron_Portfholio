@@ -1631,24 +1631,35 @@ ul {
   .vcard-main {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     padding: 0 16px;
   }
 
   .sidebar {
     max-width: 100%;
     position: relative;
-    margin-bottom: 0;
-    overflow: hidden; /* cleanly clips the top-right button within the card boundary */
+    margin-bottom: 25px; /* distinct gap between sidebar and about card */
+    max-height: 116px;
+    overflow: hidden;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sidebar.active {
+    max-height: 850px;
   }
 
   .sidebar-info {
     flex-direction: row;
     align-items: center;
     text-align: left;
-    gap: 16px;
+    gap: 14px;
     position: relative;
-    padding-right: 45px; /* prevent overlap with corner toggle button */
+    padding-right: 48px; /* prevent overlap with corner toggle button */
+    min-height: 80px;
   }
 
   .avatar-box {
@@ -1657,9 +1668,9 @@ ul {
   }
 
   .avatar-initials {
-    width: 72px;
-    height: 72px;
-    font-size: 26px;
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
     border-radius: 16px;
   }
 
@@ -1720,29 +1731,21 @@ ul {
     transform: scale(0.92);
   }
 
-  /* Smooth GPU-accelerated grid accordion transition */
+  /* Smooth slide-down reveal from top */
   .sidebar-info_more {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     width: 100%;
-  }
-
-  .sidebar-info_more > * {
-    overflow: hidden;
     opacity: 0;
-    transform: translateY(-8px);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(-20px);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    visibility: hidden;
   }
 
   .sidebar.active .sidebar-info_more {
-    grid-template-rows: 1fr;
-    margin-top: 8px;
-  }
-
-  .sidebar.active .sidebar-info_more > * {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
   }
 
   .main-content {
