@@ -1620,18 +1620,22 @@ ul {
 @media (max-width: 1024px) {
   .vcard-main {
     flex-direction: column;
-    align-items: center;
-    gap: 25px;
+    align-items: stretch;
+    width: 100%;
+    max-width: 600px;
+    gap: 30px !important; /* Forces 30px clean space between both cards */
     padding: 0 16px;
+    margin: 0 auto;
   }
 
   .sidebar {
+    width: 100%;
     max-width: 100%;
     position: relative;
-    margin-bottom: 25px; /* distinct gap between sidebar and about card */
-    max-height: 116px;
+    margin-bottom: 30px !important; /* Explicit bottom gap separating from About card */
+    max-height: 112px;
     overflow: hidden;
-    padding: 16px;
+    padding: 16px 18px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1652,7 +1656,8 @@ ul {
     gap: 14px;
     position: relative;
     padding-right: 48px; /* prevent overlap with corner toggle button */
-    min-height: 80px;
+    min-height: 76px;
+    width: 100%;
     flex-shrink: 0;
   }
 
@@ -1662,9 +1667,9 @@ ul {
   }
 
   .avatar-initials {
-    width: 64px;
-    height: 64px;
-    font-size: 24px;
+    width: 62px;
+    height: 62px;
+    font-size: 22px;
     border-radius: 16px;
   }
 
@@ -1674,7 +1679,7 @@ ul {
   }
 
   .info-content .name {
-    font-size: 17px;
+    font-size: 16.5px;
     margin-bottom: 4px;
     white-space: normal;
     line-height: 1.25;
@@ -1684,6 +1689,10 @@ ul {
     margin-bottom: 0;
     font-size: 11px;
     padding: 3px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   .info_more-btn {
@@ -1691,8 +1700,8 @@ ul {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -16px;
+    right: -18px;
     border-radius: 0 20px 0 15px;
     color: var(--orange-primary);
     background: var(--border-gradient-onyx, var(--bg-gradient-onyx));
@@ -1700,7 +1709,7 @@ ul {
     border-bottom: 1px solid var(--jet);
     border-top: none;
     border-right: none;
-    padding: 10px;
+    padding: 10px 12px;
     box-shadow: none;
     z-index: 2;
     cursor: pointer;
@@ -1744,7 +1753,8 @@ ul {
 
   .main-content {
     width: 100%;
-    margin-bottom: 65px;
+    max-width: 100%;
+    margin-bottom: 80px;
     /* Leave space for bottom fixed navbar */
   }
 
