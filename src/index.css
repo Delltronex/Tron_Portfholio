@@ -116,7 +116,7 @@ ul {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
   gap: 25px;
   padding: 0 20px;
 }
@@ -132,7 +132,7 @@ ul {
   padding: 24px 20px;
   box-shadow: var(--shadow-1);
   position: sticky;
-  top: 30px;
+  top: 20px;
   z-index: 10;
   transition: var(--transition-2);
 }
