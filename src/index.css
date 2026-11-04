@@ -75,6 +75,29 @@ html {
   font-family: var(--ff-poppins);
   background: var(--smoky-black);
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--orange-primary) var(--smoky-black);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--smoky-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--orange-primary);
+  border-radius: 8px;
+  border: 2px solid var(--smoky-black);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--orange-hover);
 }
 
 body {
