@@ -1646,50 +1646,65 @@ ul {
     align-items: center;
     text-align: left;
     gap: 16px;
+    position: relative;
+    padding-right: 45px; /* prevent overlap with corner toggle button */
   }
 
   .avatar-box {
     margin-bottom: 0;
+    flex-shrink: 0;
   }
 
   .avatar-initials {
-    width: 80px;
-    height: 80px;
-    font-size: 28px;
+    width: 72px;
+    height: 72px;
+    font-size: 26px;
     border-radius: 16px;
   }
 
+  .info-content {
+    min-width: 0;
+    flex: 1;
+  }
+
   .info-content .name {
-    font-size: 19px;
+    font-size: 17px;
     margin-bottom: 4px;
+    white-space: normal;
+    line-height: 1.25;
   }
 
   .info-content .title {
     margin-bottom: 0;
+    font-size: 11px;
+    padding: 3px 10px;
   }
 
   .info_more-btn {
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
     position: absolute;
-    top: -4px;
-    right: -4px;
-    border-radius: 0 16px;
+    top: -24px;
+    right: -20px;
+    border-radius: 0 20px 0 15px;
     color: var(--orange-primary);
     background: var(--border-gradient-onyx, var(--bg-gradient-onyx));
     border: 1px solid var(--jet);
-    padding: 8px 14px;
-    font-size: 11px;
-    font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 10px;
     box-shadow: none;
-    z-index: 1;
+    z-index: 2;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .info_more-btn:active {
-    transform: scale(0.95);
+  .info_more-btn span:not(.info_more-icon) {
+    display: none; /* Hide text on mobile for authentic codewithsadee square arrow corner pill */
+  }
+
+  .info_more-icon {
+    font-size: 20px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .info_more-btn:hover {
@@ -1697,13 +1712,8 @@ ul {
     color: var(--white-1);
   }
 
-  .info_more-icon {
-    display: inline-block;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .info_more-icon.rotated {
-    transform: rotate(180deg);
+  .info_more-btn:active {
+    transform: scale(0.92);
   }
 
   /* Smooth GPU-accelerated grid accordion transition */

@@ -210,7 +210,7 @@ export default function App() {
               aria-label="Toggle Contacts"
             >
               <span>{isSidebarOpen ? 'Hide Contacts' : 'Show Contacts'}</span>
-              <span className={`material-symbols-outlined info_more-icon ${isSidebarOpen ? 'rotated' : ''}`} style={{ fontSize: '18px' }}>
+              <span className={`material-symbols-outlined info_more-icon ${isSidebarOpen ? 'rotated' : ''}`}>
                 expand_more
               </span>
             </button>
