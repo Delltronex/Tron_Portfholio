@@ -208,18 +208,22 @@ export default function App() {
           <div className="sidebar-info_more">
             <div className="sidebar-separator"></div>
 
-            {/* AI Twin Trigger Card */}
-            <div className="sidebar-ai-card">
-              <span className="material-symbols-outlined ai-pulse-icon">psychology</span>
-              <div style={{ fontSize: '13px', fontWeight: '600', color: 'var(--white-2)' }}>Ask My AI Twin</div>
-              <p style={{ fontSize: '11.5px', color: 'var(--light-gray-70)', margin: '4px 0 8px' }}>
-                Instant answers on my resume &amp; experience
-              </p>
-              <button className="sidebar-ai-btn" onClick={() => openChatWithQuery()}>
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>chat</span>
-                <span>Start Conversation</span>
-              </button>
-            </div>
+            {/* AI Twin Trigger Compact Pill */}
+            <button className="sidebar-ai-compact" onClick={() => openChatWithQuery()}>
+              <div className="ai-compact-left">
+                <div className="ai-compact-icon">
+                  <span className="material-symbols-outlined">smart_toy</span>
+                </div>
+                <div className="ai-compact-text">
+                  <div className="ai-compact-title">
+                    <span>Ask AI Twin</span>
+                    <span className="ai-status-chip">Live</span>
+                  </div>
+                  <div className="ai-compact-sub">Instant answers on Kaushal's resume</div>
+                </div>
+              </div>
+              <span className="material-symbols-outlined ai-compact-arrow">chevron_right</span>
+            </button>
 
             {/* Contact Details List */}
             <ul className="contacts-list">
