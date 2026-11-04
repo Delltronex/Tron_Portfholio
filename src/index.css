@@ -384,11 +384,11 @@ ul {
   top: 0;
   right: 0;
   background: hsla(240, 1%, 17%, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--jet);
   border-radius: 0 20px 0 20px;
-  padding: 0 25px;
+  padding: 0 20px;
   z-index: 5;
 }
 
@@ -402,16 +402,17 @@ ul {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
-  padding: 14px 0;
+  gap: 16px;
+  padding: 12px 0;
 }
 
 .navbar-link {
   color: var(--light-gray);
   font-size: 14px;
   font-weight: 500;
-  transition: var(--transition-1);
-  padding: 4px 6px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 6px 14px;
+  border-radius: 12px;
   position: relative;
 }
 
@@ -419,20 +420,23 @@ ul {
   color: hsl(0, 0%, 45%);
 }
 
-.navbar-link:hover,
-.navbar-link.active {
+.navbar-link:hover {
   color: var(--orange-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.navbar-link.active {
+  color: var(--white-1);
+  background: var(--bg-gradient-orange);
+  box-shadow: 0 4px 14px var(--orange-glow);
+}
+
+[data-theme="light"] .navbar-link.active {
+  color: #ffffff;
 }
 
 .navbar-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--orange-primary);
-  border-radius: 2px;
+  display: none;
 }
 
 /* ================= Article / Section Header ================= */
@@ -1598,38 +1602,43 @@ ul {
     margin-bottom: 65px; /* Leave space for bottom fixed navbar */
   }
 
-  /* Fixed bottom app navigation bar (like codewithsadee) */
+  /* Fixed bottom Apple Liquid Glass navigation bar */
   .navbar {
     position: fixed;
     top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: hsla(240, 1%, 17%, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-top: 1px solid var(--jet);
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -10px 30px hsla(0, 0%, 0%, 0.45);
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    width: auto;
+    background: rgba(28, 28, 30, 0.7);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
+    box-shadow: 
+      0 16px 36px rgba(0, 0, 0, 0.5),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
     z-index: 100;
-    padding: 0;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding: 6px;
+    margin: 0 auto;
+    max-width: 440px;
   }
 
   [data-theme="light"] .navbar {
-    background: hsla(0, 0%, 100%, 0.95);
-    border-top: 1px solid var(--jet);
-    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 
+      0 14px 30px rgba(0, 0, 0, 0.12),
+      inset 0 1px 1px rgba(255, 255, 255, 0.8);
   }
 
   .navbar-list {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 12px 10px;
-    gap: 0;
+    padding: 0;
+    gap: 4px;
     margin: 0;
   }
 
@@ -1639,16 +1648,37 @@ ul {
   }
 
   .navbar-link {
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 500;
-    padding: 6px 4px;
-    display: block;
+    padding: 9px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     white-space: nowrap;
+    border-radius: 22px;
+    color: rgba(255, 255, 255, 0.65);
+    background: transparent;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .navbar-link.active::after {
-    bottom: -2px;
+  [data-theme="light"] .navbar-link {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .navbar-link:active {
+    transform: scale(0.94);
+  }
+
+  .navbar-link.active {
+    color: var(--white-1);
+    background: var(--bg-gradient-orange);
+    box-shadow: 0 4px 14px var(--orange-glow);
+    font-weight: 600;
+  }
+
+  [data-theme="light"] .navbar-link.active {
+    color: #ffffff;
   }
 }
 
