@@ -1703,9 +1703,9 @@ textarea.form-input {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    max-width: 600px;
+    max-width: 860px;
     gap: 30px !important; /* Forces 30px clean space between both cards */
-    padding: 0 16px;
+    padding: 0 20px;
     margin: 0 auto;
   }
 
@@ -1843,10 +1843,12 @@ textarea.form-input {
   .navbar {
     position: fixed;
     top: auto;
-    bottom: 12px;
-    left: 14px;
-    right: 14px;
-    width: auto;
+    bottom: 16px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 440px;
     background: rgba(28, 28, 30, 0.72);
     backdrop-filter: blur(28px) saturate(190%);
     -webkit-backdrop-filter: blur(28px) saturate(190%);
@@ -1857,8 +1859,7 @@ textarea.form-input {
       inset 0 1px 1px rgba(255, 255, 255, 0.2);
     z-index: 100;
     padding: 6px;
-    margin: 0 auto;
-    max-width: 440px;
+    margin: 0;
     overflow: hidden;
   }
 
@@ -1902,9 +1903,8 @@ textarea.form-input {
   }
 
   .navbar-list {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     padding: 0;
     gap: 0;
@@ -1914,18 +1914,22 @@ textarea.form-input {
   }
 
   .navbar-item {
-    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
   }
 
   .navbar-link {
     font-size: 13px;
     font-weight: 500;
-    padding: 9px 4px;
+    padding: 9px 0;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    text-align: center;
     white-space: nowrap;
     border-radius: 22px;
     color: rgba(255, 255, 255, 0.65);
@@ -2042,6 +2046,21 @@ textarea.form-input {
     padding: 10px 16px;
     font-size: 13px;
     gap: 6px;
+    z-index: 105;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Tablet-specific optimizations: Keep launcher buttons clean, above bottom dock */
+  .theme-settings-trigger {
+    bottom: 88px;
+    left: 24px;
+    z-index: 105;
+  }
+
+  .chat-launcher-pill {
+    bottom: 88px;
+    right: 24px;
     z-index: 105;
   }
 }
