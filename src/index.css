@@ -441,25 +441,53 @@ ul {
   min-height: 700px;
 }
 
-/* ================= Top Navbar (vCard Style) ================= */
+/* ================= Top Navbar (vCard Style with Sliding Liquid Glider) ================= */
 .navbar {
   position: absolute;
   top: 0;
   right: 0;
   background: hsla(240, 1%, 17%, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-left: 1px solid var(--jet);
   border-bottom: 1px solid var(--jet);
   border-top: none;
   border-right: none;
   border-radius: 0 20px 0 20px;
-  padding: 0 24px;
+  padding: 8px 14px;
   z-index: 5;
+  overflow: hidden;
 }
 
 .navbar-pill-glider {
-  display: none;
+  display: block;
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 14px;
+  width: calc((100% - 28px) / 4);
+  border-radius: 12px;
+  background: var(--bg-gradient-orange);
+  box-shadow: 0 4px 14px var(--orange-glow);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.navbar-pill-glider[data-tab="about"] {
+  transform: translateX(0%);
+}
+
+.navbar-pill-glider[data-tab="resume"] {
+  transform: translateX(100%);
+}
+
+.navbar-pill-glider[data-tab="portfolio"] {
+  transform: translateX(200%);
+}
+
+.navbar-pill-glider[data-tab="contact"] {
+  transform: translateX(300%);
 }
 
 [data-theme="light"] .navbar {
@@ -473,21 +501,30 @@ ul {
 
 .navbar-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 10px;
-  padding: 10px 0;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.navbar-item {
+  text-align: center;
 }
 
 .navbar-link {
   color: var(--light-gray);
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 7px 18px;
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease;
+  padding: 8px 18px;
   border-radius: 12px;
   position: relative;
   line-height: 1.4;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 [data-theme="light"] .navbar-link {
@@ -495,14 +532,16 @@ ul {
 }
 
 .navbar-link:hover {
-  color: var(--orange-primary);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--white-1);
+}
+
+.navbar-link:active {
+  transform: scale(0.95);
 }
 
 .navbar-link.active {
   color: var(--white-1);
-  background: var(--bg-gradient-orange);
-  box-shadow: 0 4px 14px var(--orange-glow);
+  font-weight: 600;
 }
 
 [data-theme="light"] .navbar-link.active {
