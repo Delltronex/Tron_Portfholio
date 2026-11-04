@@ -1145,17 +1145,35 @@ ul {
 .chat-chips-bar {
   padding: 8px 14px;
   display: flex;
-  gap: 6px;
+  gap: 8px;
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  user-select: none;
+  cursor: grab;
   background: var(--eerie-black-1);
   border-top: 1px solid var(--jet);
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--jet) transparent;
   flex-shrink: 0;
 }
 
+.chat-chips-bar:active {
+  cursor: grabbing;
+}
+
 .chat-chips-bar::-webkit-scrollbar {
-  display: none;
+  height: 4px;
+}
+
+.chat-chips-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-chips-bar::-webkit-scrollbar-thumb {
+  background: var(--jet);
+  border-radius: 4px;
 }
 
 .chat-chip {

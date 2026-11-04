@@ -14,6 +14,14 @@ export default function ChatbotModal({ isOpen, onClose, initialQuery }) {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const chipsBarRef = useRef(null);
+
+  // Mouse wheel horizontal scroll support on desktop
+  const handleChipsWheel = (e) => {
+    if (chipsBarRef.current && e.deltaY !== 0) {
+      chipsBarRef.current.scrollLeft += e.deltaY;
+    }
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -162,7 +170,11 @@ export default function ChatbotModal({ isOpen, onClose, initialQuery }) {
         </div>
 
         {/* Quick Suggestion Chips */}
-        <div className="chat-chips-bar">
+        <div 
+          className="chat-chips-bar" 
+          ref={chipsBarRef}
+          onWheel={handleChipsWheel}
+        >
           {quickChips.map((chip, idx) => (
             <button key={idx} className="chat-chip" onClick={() => handleSend(chip.query)}>
               {chip.label}
