@@ -526,20 +526,23 @@ ul {
   border-radius: 3px;
 }
 
-/* ================= Tab Pages ================= */
+/* ================= Tab Pages Smooth iOS Transition ================= */
 .tab-content {
-  animation: fade 0.4s ease backwards;
+  animation: appleTabTransition 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
 }
 
-@keyframes fade {
+@keyframes appleTabTransition {
   0% {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(14px) scale(0.985);
+    filter: blur(4px);
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
