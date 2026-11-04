@@ -227,10 +227,10 @@ export default function App() {
                 </div>
                 <div className="ai-compact-text">
                   <div className="ai-compact-title">
-                    <span>Ask AI Twin</span>
+                    <span>AI Twin</span>
 
                   </div>
-                  <div className="ai-compact-sub">Instant answers on Kaushal's resume</div>
+                  <div className="ai-compact-sub">For Quick Responses</div>
                 </div>
               </div>
 
