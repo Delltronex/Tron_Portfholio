@@ -217,12 +217,12 @@ export default function App() {
                 <div className="ai-compact-text">
                   <div className="ai-compact-title">
                     <span>Ask AI Twin</span>
-                    <span className="ai-status-chip">Live</span>
+
                   </div>
                   <div className="ai-compact-sub">Instant answers on Kaushal's resume</div>
                 </div>
               </div>
-              <span className="material-symbols-outlined ai-compact-arrow">chevron_right</span>
+
             </button>
 
             {/* Contact Details List */}
