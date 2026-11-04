@@ -1637,8 +1637,9 @@ ul {
 
   .sidebar {
     max-width: 100%;
-    position: static;
+    position: relative;
     margin-bottom: 0;
+    overflow: hidden; /* cleanly clips the top-right button within the card boundary */
   }
 
   .sidebar-info {
@@ -1685,12 +1686,15 @@ ul {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: -24px;
-    right: -20px;
+    top: 0;
+    right: 0;
     border-radius: 0 20px 0 15px;
     color: var(--orange-primary);
     background: var(--border-gradient-onyx, var(--bg-gradient-onyx));
-    border: 1px solid var(--jet);
+    border-left: 1px solid var(--jet);
+    border-bottom: 1px solid var(--jet);
+    border-top: none;
+    border-right: none;
     padding: 10px;
     box-shadow: none;
     z-index: 2;
