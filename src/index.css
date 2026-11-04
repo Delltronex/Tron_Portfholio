@@ -539,51 +539,41 @@ ul {
 
 /* ================= Tab Pages Apple iOS Spring Transition ================= */
 .tab-content {
-  will-change: transform, opacity, filter;
-  transform-origin: top center;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .tab-content.slide-from-right {
-  animation: appleTabSlideRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: appleTabSlideRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .tab-content.slide-from-left {
-  animation: appleTabSlideLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: appleTabSlideLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes appleTabSlideRight {
   0% {
     opacity: 0;
-    transform: translate3d(36px, 0, 0) scale(0.985);
-    filter: blur(8px);
-  }
-
-  50% {
-    opacity: 0.8;
+    transform: translate3d(24px, 0, 0);
   }
 
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes appleTabSlideLeft {
   0% {
     opacity: 0;
-    transform: translate3d(-36px, 0, 0) scale(0.985);
-    filter: blur(8px);
-  }
-
-  50% {
-    opacity: 0.8;
+    transform: translate3d(-24px, 0, 0);
   }
 
   100% {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -1645,7 +1635,10 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   .sidebar.active {
@@ -1660,6 +1653,7 @@ ul {
     position: relative;
     padding-right: 48px; /* prevent overlap with corner toggle button */
     min-height: 80px;
+    flex-shrink: 0;
   }
 
   .avatar-box {
@@ -1731,21 +1725,21 @@ ul {
     transform: scale(0.92);
   }
 
-  /* Smooth slide-down reveal from top */
+  /* Smooth slide-down reveal from top without flickering */
   .sidebar-info_more {
     width: 100%;
     opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate3d(0, -12px, 0);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
-    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .sidebar.active .sidebar-info_more {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     pointer-events: auto;
-    visibility: visible;
   }
 
   .main-content {
