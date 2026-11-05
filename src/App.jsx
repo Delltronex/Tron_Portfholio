@@ -36,6 +36,38 @@ export default function App() {
   const [currentColor, setCurrentColor] = useState(COLOR_PRESETS[0]);
   const [customHex, setCustomHex] = useState('#ff6b00');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [avatarImage, setAvatarImage] = useState(() => {
+    return localStorage.getItem('user_avatar_image') || null;
+  });
+
+  const handleAvatarUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file (PNG, JPG, WEBP).');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (uploadEvent) => {
+      const base64 = uploadEvent.target?.result;
+      if (typeof base64 === 'string') {
+        setAvatarImage(base64);
+        try {
+          localStorage.setItem('user_avatar_image', base64);
+        } catch (err) {
+          console.warn('LocalStorage image quota exceeded:', err);
+        }
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeAvatarImage = () => {
+    setAvatarImage(null);
+    localStorage.removeItem('user_avatar_image');
+  };
 
   // Apply theme mode and color variables to document
   useEffect(() => {
@@ -195,8 +227,15 @@ export default function App() {
         <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
           <div className="sidebar-info">
             <figure className="avatar-box">
-              <div className="avatar-initials">KS</div>
-
+              {avatarImage ? (
+                <img
+                  src={avatarImage}
+                  alt={resumeData.name}
+                  className="avatar-photo"
+                />
+              ) : (
+                <div className="avatar-initials">KS</div>
+              )}
             </figure>
 
             <div className="info-content">
@@ -697,6 +736,46 @@ export default function App() {
               <button className="customizer-close-btn" onClick={() => setIsSettingsOpen(false)}>
                 <span className="material-symbols-outlined">close</span>
               </button>
+            </div>
+
+            {/* Profile Avatar Upload */}
+            <div className="customizer-section">
+              <div className="customizer-title">
+                <span>Profile Photo</span>
+                {avatarImage && (
+                  <button
+                    type="button"
+                    className="avatar-remove-btn"
+                    onClick={removeAvatarImage}
+                    title="Remove custom avatar and reset to initials"
+                  >
+                    Reset to Initials
+                  </button>
+                )}
+              </div>
+              <div className="avatar-upload-card">
+                <div className="avatar-preview-box">
+                  {avatarImage ? (
+                    <img src={avatarImage} alt="Avatar Preview" className="avatar-preview-img" />
+                  ) : (
+                    <div className="avatar-initials-mini">KS</div>
+                  )}
+                </div>
+                <div className="avatar-upload-actions">
+                  <label htmlFor="avatar-file-input" className="avatar-upload-label">
+                    <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>cloud_upload</span>
+                    <span>{avatarImage ? 'Change Photo' : 'Upload Photo'}</span>
+                  </label>
+                  <input
+                    id="avatar-file-input"
+                    type="file"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={handleAvatarUpload}
+                  />
+                  <span className="avatar-upload-hint">Supports PNG, JPG, WebP</span>
+                </div>
+              </div>
             </div>
 
             {/* Mode selection: Dark vs Light */}
