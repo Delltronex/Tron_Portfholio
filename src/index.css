@@ -748,6 +748,19 @@ ul {
   border-radius: 14px;
   padding: 16px 14px;
   text-align: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  position: relative;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 107, 0, 0.45);
+  box-shadow: 0 10px 24px var(--orange-glow);
+}
+
+.metric-card:hover .metric-val {
+  transform: scale(1.05);
 }
 
 .metric-val {
@@ -755,6 +768,7 @@ ul {
   font-weight: 700;
   color: var(--orange-primary);
   margin-bottom: 4px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .metric-lbl {
