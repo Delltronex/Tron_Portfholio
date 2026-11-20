@@ -163,7 +163,7 @@ export default function App() {
         sent = true;
         setContactFeedback({
           type: 'success',
-          text: `Thank you ${name}! Your message has been sent directly to Kaushal via SMTP.`
+          text: `Thank you ${name}! Your message has been sent directly to Kaushal.`
         });
         form.reset();
       } else {
