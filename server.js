@@ -92,7 +92,7 @@ app.post('/api/contact', async (req, res) => {
   } catch (error) {
     console.error('[SMTP Error]:', error);
     return res.status(500).json({
-      error: error.message || 'Failed to send email via SMTP.'
+      error: error.message || 'Failed to send email.'
     });
   }
 });
